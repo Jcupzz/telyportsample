@@ -5,6 +5,7 @@ import 'package:telyportsample/Static/MyBottomNavigationBar.dart';
 
 import 'Pages/MyHomePage.dart';
 
+bool isSwitched = false;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

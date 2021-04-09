@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
 import 'package:telyportsample/Database_Services/Database_Services.dart';
+import 'package:telyportsample/main.dart';
 
 
 class MyHomePage extends StatefulWidget {
@@ -10,7 +11,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  bool isSwitched = false;
   @override
   void initState() {
     // TODO: implement initState
@@ -67,7 +67,9 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void startLocation() {
+    if(isSwitched) {
       getPermission();
+    }
   }
 
   Future getPermission() async{

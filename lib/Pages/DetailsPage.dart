@@ -21,12 +21,8 @@ class _DetailsPageState extends State<DetailsPage> {
         margin: EdgeInsets.fromLTRB(0, 5, 0, 0),
         height: MediaQuery.of(context).size.height,
         child: StreamBuilder<QuerySnapshot>(
-            stream: firestore
-                .collection(firebaseUser.uid.toString())
-                .orderBy('time',descending: true)
-                .snapshots(),
-            builder:
-                (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+            stream: firestore.collection(firebaseUser.uid.toString()).orderBy('time', descending: true).snapshots(),
+            builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
               if (!snapshot.hasData) {
                 return Loading();
               } else {
@@ -38,15 +34,14 @@ class _DetailsPageState extends State<DetailsPage> {
                       child: Card(
                           color: Theme.of(context).cardColor,
                           elevation: 0,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(14.0)),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14.0)),
                           child: ListTile(
                             onTap: () {
-                            //   Navigator.push(
-                            //       context,
-                            //       MaterialPageRoute(
-                            //           builder: (_) => Details(document)));
-                             },
+                              //   Navigator.push(
+                              //       context,
+                              //       MaterialPageRoute(
+                              //           builder: (_) => Details(document)));
+                            },
                             onLongPress: () {
                               //showDeleteDialog(document);
                             },
@@ -56,16 +51,18 @@ class _DetailsPageState extends State<DetailsPage> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text("Lattitude: "+
-                                      document.data()['lat'].toString(),
-                                      style:Theme.of(context).textTheme.headline3),
                                   Text(
-                                      "Longitude: "+
-                                      document.data()['long'].toString(),
-                                      style:Theme.of(context).textTheme.headline5),
+                                    "Lattitude: " + document.data()['lat'].toString(),
+                                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                                  ),
                                   Text(
-                                      format_posted_time(document.data()['time']).toString(),
-                                      style:Theme.of(context).textTheme.headline5),
+                                    "Longitude: " + document.data()['long'].toString(),
+                                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(
+                                    format_posted_time(document.data()['time']).toString(),
+                                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                                  ),
                                 ],
                               ),
                             ),
@@ -78,9 +75,9 @@ class _DetailsPageState extends State<DetailsPage> {
       ),
     );
   }
+
   String format_posted_time(Timestamp posted_time) {
-    DateTime postedDate =
-    posted_time.toDate(); //Converted timestamp to DateTime
+    DateTime postedDate = posted_time.toDate(); //Converted timestamp to DateTime
 
     bool numericDates = true;
 
