@@ -14,7 +14,7 @@ class Database_Services{
     await collectionReference1.add({
       'lat': locationDto.latitude,
       'long':locationDto.longitude,
-      'time': locationDto.time,
+      'time': DateTime.now(),
       'uid': firebaseUser.uid,
     }).then((value) {
       print("Added to firebase:>");
