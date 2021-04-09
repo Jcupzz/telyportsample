@@ -42,12 +42,12 @@ class _MyHomePageState extends State<MyHomePage> {
                     onChanged: (value){
                       setState(() {
                         isSwitched = value;
-                        if(value == true){
+                        if(isSwitched == true){
                           //TODO: START SERVICE
                           startLocation();
                         }
                         else{
-                         // onStop();
+
                         }
                         print(isSwitched);
                       });
@@ -67,9 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void startLocation() {
-    if(isSwitched) {
       getPermission();
-    }
   }
 
   Future getPermission() async{
@@ -96,10 +94,14 @@ class _MyHomePageState extends State<MyHomePage> {
 
     _locationData = await location.getLocation();
     location.enableBackgroundMode(enable: true);
-    location.onLocationChanged.listen((LocationData currentLocation) {
-        database_services.addLocationToFb(currentLocation);
 
-    });
+      location.onLocationChanged.listen((LocationData currentLocation) {
+      if(isSwitched) {
+        database_services.addLocationToFb(currentLocation);
+      }
+      });
+
+
   }
 }
 
