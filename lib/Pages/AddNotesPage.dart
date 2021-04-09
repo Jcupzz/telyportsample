@@ -8,6 +8,15 @@ class AddNotesPage extends StatefulWidget {
 class _AddNotesPageState extends State<AddNotesPage> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      body: Center(
+        child: Text("Tap on '+' to add to list",style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){
+
+        },
+      ),
+    );
   }
 }
