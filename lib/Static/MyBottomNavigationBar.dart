@@ -1,6 +1,7 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:telyportsample/Database_Services/Database_Services.dart';
 import 'package:telyportsample/Pages/AddNotesPage.dart';
 import 'package:telyportsample/Pages/DetailsPage.dart';
 import 'package:telyportsample/Pages/DisplayNotesPage.dart';
@@ -19,7 +20,18 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
     AddNotesPage(),
     DisplayNotesPage(),
   ];
-
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+  @override
+  void setState(fn) async{
+    // TODO: implement setState
+    Database_Services database_services = new Database_Services();
+    await database_services.signInAnonymously();
+    super.setState(fn);
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

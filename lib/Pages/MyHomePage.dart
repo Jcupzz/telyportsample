@@ -11,10 +11,13 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  Database_Services database_services = new Database_Services();
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    database_services.checkConnectivity(context);
+
   }
 
 

@@ -1,5 +1,6 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:connectivity/connectivity.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
@@ -48,8 +49,8 @@ class Database_Services{
     FirebaseFirestore firestore = FirebaseFirestore.instance;
     if(text!=null) {
       if (!(documentSnapshot == null)) {
-        await firestore.collection(firebaseUser.uid)
-            .doc(documentSnapshot.id)
+        await firestore.collection('Text')
+            .doc('Texter').collection(firebaseUser.uid).doc(documentSnapshot.id)
             .update({
           "time": DateTime.now(),
           "text": text,
@@ -59,7 +60,7 @@ class Database_Services{
         });
       }
       else {
-        await firestore.collection(firebaseUser.uid).add({
+        await firestore.collection('Text').doc('Texter').collection(firebaseUser.uid).add({
           "time": DateTime.now(),
           "text": text,
         }).then((value) {
@@ -68,5 +69,62 @@ class Database_Services{
       }
     }
   }
+  Future<void> deleteTextFromFb(
+      DocumentSnapshot documentSnapshot) async {
+    FirebaseAuth _auth = FirebaseAuth.instance;
+    final User firebaseUser = _auth.currentUser;
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
 
+    await firestore
+        .collection('Text')
+        .doc('Texter')
+        .collection(firebaseUser.uid)
+        .doc(documentSnapshot.id)
+        .delete()
+        .then((value) {
+      error_handling.printSuccess("Listy deleted!");
+    }).catchError((error) {
+      error_handling.printError(
+          "Something's wrong! check internet connection and try again!");
+    });
+  }
+  Future<String> checkConnectivity(BuildContext context)async{
+
+    var connectivityResult = await (Connectivity().checkConnectivity());
+    if (connectivityResult == ConnectivityResult.mobile) {
+      return 'Connected';
+    } else if (connectivityResult == ConnectivityResult.wifi) {
+      return 'Connected';
+      // I am connected to a wifi network.
+    }
+    else{
+      showDialog(context: context, builder: (context){
+        return AlertDialog(
+          elevation: 24,
+          backgroundColor: Colors.deepPurple[600],
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+          title: Text(
+            "No internet!",
+            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+          ),
+          content: Text(
+            "Please connect to a network!",
+            style: TextStyle(color: Colors.white),
+          ),
+          actions: <Widget>[
+            FlatButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text(
+                "Ok",
+                style: TextStyle(color: Colors.greenAccent, fontSize: 18),
+              ),
+            ),
+          ],
+        );
+      });
+      return 'Not Connected';
+    }
+  }
 }

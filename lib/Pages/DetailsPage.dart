@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:telyportsample/Database_Services/Database_Services.dart';
 import 'package:telyportsample/Static/Loading.dart';
 
 class DetailsPage extends StatefulWidget {
@@ -10,18 +11,25 @@ class DetailsPage extends StatefulWidget {
 
 class _DetailsPageState extends State<DetailsPage> {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
+  Database_Services database_services = new Database_Services();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    database_services.checkConnectivity(context);
+  }
 
   @override
   Widget build(BuildContext context) {
     FirebaseAuth _auth = FirebaseAuth.instance;
     final User firebaseUser = _auth.currentUser;
-    return Scaffold(
+    return firebaseUser == null ? Container(color: Colors.white,):Scaffold(
       body: Container(
         width: MediaQuery.of(context).size.width,
         margin: EdgeInsets.fromLTRB(0, 5, 0, 0),
         height: MediaQuery.of(context).size.height,
         child: StreamBuilder<QuerySnapshot>(
-            stream: firestore.collection(firebaseUser.uid.toString()).orderBy('time', descending: true).snapshots(),
+            stream: firestore.collection(firebaseUser.uid).orderBy('time', descending: true).snapshots(),
             builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
               if (!snapshot.hasData) {
                 return Loading();
