@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "502095358534",
+    "project_id": "telyportsample",
+    "storage_bucket": "telyportsample.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:502095358534:android:f06dd1065179563d307847",
+        "android_client_info": {
+          "package_name": "com.dubecreations.telyportsample"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "502095358534-s4sssicfm1e1bqbon1ovlgem98dkgcce.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2kWNM4WhotjgUBCCLCG4RCu20n-ypvn8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "502095358534-s4sssicfm1e1bqbon1ovlgem98dkgcce.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
