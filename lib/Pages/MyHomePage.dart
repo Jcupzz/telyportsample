@@ -1,7 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
 import 'package:telyportsample/Database_Services/Database_Services.dart';
+import 'package:telyportsample/Static/Database_Helper.dart';
+import 'package:telyportsample/Static/Location.dart';
 import 'package:telyportsample/main.dart';
 
 
@@ -12,18 +13,22 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   Database_Services database_services = new Database_Services();
+  int counter = 0;
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     database_services.checkConnectivity(context);
-
   }
 
 
-
-
 //Optional
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
 
 
   @override
@@ -31,7 +36,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(20,10,10,10),
+          padding: const EdgeInsets.fromLTRB(20, 10, 10, 10),
           child: Column(
             children: [
               Row(
@@ -42,14 +47,14 @@ class _MyHomePageState extends State<MyHomePage> {
                   Text("Enable location tracking"),
                   Switch(
                     value: isSwitched,
-                    onChanged: (value){
+                    onChanged: (value) {
                       setState(() {
                         isSwitched = value;
-                        if(isSwitched == true){
+                        if (isSwitched == true) {
                           //TODO: START SERVICE
                           startLocation();
                         }
-                        else{
+                        else {
 
                         }
                         print(isSwitched);
@@ -70,15 +75,16 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void startLocation() {
-      getPermission();
+    getPermission();
   }
 
-  Future getPermission() async{
+  Future getPermission() async {
     Database_Services database_services = new Database_Services();
     Location location = new Location();
     bool _serviceEnabled;
     PermissionStatus _permissionGranted;
     LocationData _locationData;
+    var data;
     _serviceEnabled = await location.serviceEnabled();
     if (!_serviceEnabled) {
       _serviceEnabled = await location.requestService();
@@ -97,20 +103,32 @@ class _MyHomePageState extends State<MyHomePage> {
 
     _locationData = await location.getLocation();
     location.enableBackgroundMode(enable: true);
-
-      location.onLocationChanged.listen((LocationData currentLocation) {
-      if(isSwitched) {
-        if(database_services.checkConnectivity(context).toString()=="Connected") {
+    Database_Helper database_helper = new Database_Helper();
+    location.onLocationChanged.listen((LocationData currentLocation) async{
+      if (isSwitched) {
+        if (database_services.checkConnectivity(context).toString() == "Connected") {
           database_services.addLocationToFb(currentLocation);
         }
-        else{
-          
+        else {
+          data = await database_helper.CreateDB();
+          final fido = MyLocations(
+            id: currentLocation.time.ceil(),
+            lat: currentLocation.latitude.toString(),
+            long: currentLocation.longitude.toString(),
+          );
+          await database_helper.insertLocation(fido, data);
         }
       }
-      });
-
-
+    });
+    if(data!=null){
+      print(data);
+      print(await database_helper.location(data));
+    }
+    else{
+      print("null data");
+    }
   }
+
 }
 
 
