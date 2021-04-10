@@ -29,6 +29,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blueGrey[50],
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(20,10,10,10),
@@ -60,7 +61,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ],
               ),
-              Divider(height: 10,)
+              Divider(height: 10,),
+              isSwitched?Expanded(child: Container(color: Colors.blue,)):Container()
             ],
           ),
 

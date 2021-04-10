@@ -32,6 +32,7 @@ class _DisplayNotesPageState extends State<DisplayNotesPage> {
     FirebaseAuth _auth = FirebaseAuth.instance;
     final User firebaseUser = _auth.currentUser;
     return firebaseUser == null?Container(color: Colors.white,):Scaffold(
+      backgroundColor: Colors.blueGrey[50],
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(0,20,0,10),
@@ -56,8 +57,8 @@ class _DisplayNotesPageState extends State<DisplayNotesPage> {
                           return Padding(
                             padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                             child: Card(
-                                color: Colors.deepPurple[600],
-                                elevation: 20,
+                                color: Colors.white,
+                                elevation: 14,
                                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14.0)),
                                 child: ListTile(
                                   onTap: () {
@@ -74,12 +75,12 @@ class _DisplayNotesPageState extends State<DisplayNotesPage> {
                                         Text(
                                           document['text'],
                                           maxLines: 5,
-                                          style: TextStyle(color: Colors.white,fontSize: 20),
+                                          style: TextStyle(color: Colors.black,fontSize: 18),
                                         ),
                                         SizedBox(height: 2,),
                                         Text(
                                           format_posted_time(document['time']).toString(),
-                                          style: TextStyle(color: Colors.white,fontSize: 12),
+                                          style: TextStyle(color: Colors.black,fontSize: 12,fontWeight: FontWeight.w300),
                                         ),
                                       ],
                                     ),
@@ -103,14 +104,14 @@ class _DisplayNotesPageState extends State<DisplayNotesPage> {
         builder: (context) {
           return AlertDialog(
             elevation: 24,
-            backgroundColor: Colors.deepPurple[600],
+            backgroundColor: Colors.blue[700],
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
             title: Text(
               "Delete",
               style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
             ),
             content: Text(
-              "Do you want to delete this Listy?",
+              "Do you want to delete this Note?",
               style: TextStyle(color: Colors.white),
             ),
             actions: <Widget>[
@@ -120,7 +121,7 @@ class _DisplayNotesPageState extends State<DisplayNotesPage> {
                 },
                 child: Text(
                   "No",
-                  style: TextStyle(color: Colors.greenAccent, fontSize: 18),
+                  style: TextStyle(color: Colors.lightBlueAccent, fontSize: 18),
                 ),
               ),
               FlatButton(
@@ -130,7 +131,7 @@ class _DisplayNotesPageState extends State<DisplayNotesPage> {
                 },
                 child: Text(
                   "Yes",
-                  style: TextStyle(fontSize: 18, color: Colors.redAccent),
+                  style: TextStyle(fontSize: 18, color: Colors.lightBlueAccent),
                 ),
               ),
             ],

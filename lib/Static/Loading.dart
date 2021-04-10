@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 class Loading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var brightness = Theme.of(context).brightness;
+
     return Container(
-        color: Theme.of(context).backgroundColor,
+        color: Colors.blueGrey[50],
         child: Center(
           child: SpinKitRipple(
             color:Colors.blue,

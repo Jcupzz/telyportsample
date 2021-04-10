@@ -6,7 +6,6 @@ import 'package:path/path.dart';
 import 'package:telyportsample/Static/MyBottomNavigationBar.dart';
 
 import 'Pages/MyHomePage.dart';
-import 'Static/Location.dart';
 
 bool isSwitched = false;
 

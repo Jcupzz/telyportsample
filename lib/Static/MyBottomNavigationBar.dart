@@ -1,10 +1,9 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:telyportsample/Database_Services/Database_Services.dart';
-import 'package:telyportsample/Pages/AddNotesPage.dart';
 import 'package:telyportsample/Pages/DetailsPage.dart';
 import 'package:telyportsample/Pages/DisplayNotesPage.dart';
+import 'package:telyportsample/Pages/Edit_Text.dart';
 import 'package:telyportsample/Pages/MyHomePage.dart';
 
 class MyBottomNavigationBar extends StatefulWidget {
@@ -17,7 +16,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
   final pageOption = [
     MyHomePage(),
     DetailsPage(),
-    AddNotesPage(),
+    Edit_Text(null),
     DisplayNotesPage(),
   ];
   @override
@@ -36,11 +35,11 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: CurvedNavigationBar(
-        backgroundColor: Theme.of(context).backgroundColor,
+        backgroundColor: Colors.blueGrey[50],
         animationCurve: Curves.bounceInOut,
         animationDuration: Duration(milliseconds: 200),
-        color: Theme.of(context).primaryColorDark,
-        buttonBackgroundColor: Theme.of(context).primaryColorDark,
+        color: Colors.blue,
+        buttonBackgroundColor: Colors.blue[700],
         height: 60,
         items: <Widget>[
           Icon(

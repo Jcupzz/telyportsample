@@ -24,6 +24,7 @@ class _DetailsPageState extends State<DetailsPage> {
     FirebaseAuth _auth = FirebaseAuth.instance;
     final User firebaseUser = _auth.currentUser;
     return firebaseUser == null ? Container(color: Colors.white,):Scaffold(
+      backgroundColor: Colors.blueGrey[50],
       body: Container(
         width: MediaQuery.of(context).size.width,
         margin: EdgeInsets.fromLTRB(0, 5, 0, 0),

@@ -38,7 +38,7 @@ class _Edit_TextState extends State<Edit_Text> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.purple[900],
+      backgroundColor: Colors.blueGrey[50],
       body: SafeArea(
         child: Column(
           mainAxisSize: MainAxisSize.max,
@@ -49,33 +49,32 @@ class _Edit_TextState extends State<Edit_Text> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(10,0,0,0),
+                  padding: const EdgeInsets.fromLTRB(5,5,0,0),
                   child: IconButton(
+                    splashColor: Colors.red,
                       icon: Icon(
-                        Icons.arrow_back_rounded,
-                        color: Colors.white,
+                        Icons.clear,
+                        color: Colors.red,
                         size: 30,
                       ),
                       onPressed: () {
-                        Navigator.pop(context);
+                      texteditingcontroller.clear();
                       }),
                 ),
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 0, 15, 0),
+                  padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
                   child: IconButton(
                       splashColor: Colors.greenAccent,
                       icon: Icon(
                         Icons.done,
-                        color: Colors.white,
+                        color: Colors.green,
                         size: 30,
                       ),
                       onPressed: () {
                         if (texteditingcontroller.text.isEmpty) {
-                          Navigator.pop(context);
                         } else {
                           database_services.addTextToFb(toAdd, context,widget.documentSnapshot);
                           texteditingcontroller.clear();
-                          Navigator.pop(context);
                           //setState(() {});
                         }
                       }),
@@ -84,7 +83,7 @@ class _Edit_TextState extends State<Edit_Text> {
             ),
             Expanded(
               child: Container(
-                padding: EdgeInsets.fromLTRB(10, 20, 10, 20),
+                padding: EdgeInsets.fromLTRB(10, 5, 10, 20),
                 height: MediaQuery.of(context).size.height,
                 width: MediaQuery.of(context).size.width,
                 child: TextField(
@@ -100,27 +99,27 @@ class _Edit_TextState extends State<Edit_Text> {
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
                       borderSide: BorderSide(
-                          width: 3,color: Colors.deepPurple[200]
+                          width: 3,color: Colors.lightBlueAccent
                       ),
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
                       borderSide: BorderSide(
-                          width: 2, color: Colors.deepPurpleAccent),
+                          width: 2, color: Colors.blue),
                     ),
                     labelText: "Add notes",
                     alignLabelWithHint: true,
                     hintText: "Add notes",
-                    hintStyle: TextStyle(color: Colors.white),
-                    labelStyle: TextStyle(color: Colors.white,),
+                    hintStyle: TextStyle(color: Colors.blue),
+                    labelStyle: TextStyle(color: Colors.blue,),
                     fillColor: Colors.white,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
-                      borderSide: BorderSide(color: Colors.red),
+                      borderSide: BorderSide(color: Colors.lightBlue),
                     ),
                   ),
-                  style: TextStyle(fontSize: 18, color: Colors.white),
-                  cursorColor: Colors.deepOrange[200],
+                  style: TextStyle(fontSize: 18, color: Colors.black),
+                  cursorColor: Colors.blue[200],
                 ),
               ),
             )

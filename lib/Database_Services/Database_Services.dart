@@ -12,18 +12,25 @@ class Database_Services{
     FirebaseAuth _auth = FirebaseAuth.instance;
     final User firebaseUser = _auth.currentUser;
     await signInAnonymously();
-    CollectionReference collectionReference1 = FirebaseFirestore.instance.collection(firebaseUser.uid??'Location');
-    await collectionReference1.add({
-      'lat': locationDto.latitude,
-      'long':locationDto.longitude,
-      'time': DateTime.now(),
-      'uid': firebaseUser.uid,
-    }).then((value) {
-      print("Added to firebase:>");
-      return 'Done';
-    }).catchError((onError){
-      return '$onError';
-    });
+
+    if(firebaseUser != null){
+      CollectionReference collectionReference1 = FirebaseFirestore.instance.collection(firebaseUser.uid??'Location');
+      await collectionReference1.add({
+        'lat': locationDto.latitude,
+        'long':locationDto.longitude,
+        'time': DateTime.now(),
+        'uid': firebaseUser.uid,
+      }).then((value) {
+        print("Added to firebase:>");
+        return 'Done';
+      }).catchError((onError){
+        return '$onError';
+      });
+    }
+    else{
+      print("Firebase user is null user");
+    }
+
   }
   Future<void> signInAnonymously()async{
     FirebaseAuth _auth = FirebaseAuth.instance;
@@ -101,7 +108,7 @@ class Database_Services{
       showDialog(context: context, builder: (context){
         return AlertDialog(
           elevation: 24,
-          backgroundColor: Colors.deepPurple[600],
+          backgroundColor: Colors.blue[700],
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
           title: Text(
             "No internet!",
@@ -118,7 +125,7 @@ class Database_Services{
               },
               child: Text(
                 "Ok",
-                style: TextStyle(color: Colors.greenAccent, fontSize: 18),
+                style: TextStyle(color: Colors.blue[200], fontSize: 18),
               ),
             ),
           ],
