@@ -100,12 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
       location.onLocationChanged.listen((LocationData currentLocation) {
       if(isSwitched) {
-        if(database_services.checkConnectivity(context).toString()=="Connected") {
-          database_services.addLocationToFb(currentLocation);
-        }
-        else{
-          
-        }
+        database_services.addLocationToFb(currentLocation);
       }
       });
 

@@ -37,9 +37,6 @@ dependencies:
   curved_navigation_bar: ^0.3.7
   bot_toast: ^4.0.1
   connectivity: ^3.0.3
-  sqflite: ^2.0.0+3
-  path: ^1.8.0
-
 
 
 dev_dependencies:
