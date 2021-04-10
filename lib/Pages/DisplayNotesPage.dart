@@ -50,45 +50,43 @@ class _DisplayNotesPageState extends State<DisplayNotesPage> {
                   if (!snapshot.hasData) {
                     return Loading();
                   } else {
-                    return Expanded(
-                      child: ListView(
-                        shrinkWrap: true,
-                        children: snapshot.data.docs.map((DocumentSnapshot document) {
-                          return Padding(
-                            padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                            child: Card(
-                                color: Colors.white,
-                                elevation: 14,
-                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14.0)),
-                                child: ListTile(
-                                  onTap: () {
-                                    Navigator.push(context, MaterialPageRoute(builder: (_) => Edit_Text(document)));
-                                  },
-                                  onLongPress: () {
-                                    showDeleteDialog(document);
-                                  },
-                                  title: Padding(
-                                    padding: const EdgeInsets.fromLTRB(0, 5, 5, 5),
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          document['text'],
-                                          maxLines: 5,
-                                          style: TextStyle(color: Colors.black,fontSize: 18),
-                                        ),
-                                        SizedBox(height: 2,),
-                                        Text(
-                                          format_posted_time(document['time']).toString(),
-                                          style: TextStyle(color: Colors.black,fontSize: 12,fontWeight: FontWeight.w300),
-                                        ),
-                                      ],
-                                    ),
+                    return ListView(
+                      shrinkWrap: true,
+                      children: snapshot.data.docs.map((DocumentSnapshot document) {
+                        return Padding(
+                          padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                          child: Card(
+                              color: Colors.white,
+                              elevation: 14,
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14.0)),
+                              child: ListTile(
+                                onTap: () {
+                                  Navigator.push(context, MaterialPageRoute(builder: (_) => Edit_Text(document)));
+                                },
+                                onLongPress: () {
+                                  showDeleteDialog(document);
+                                },
+                                title: Padding(
+                                  padding: const EdgeInsets.fromLTRB(0, 5, 5, 5),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        document['text'],
+                                        maxLines: 5,
+                                        style: TextStyle(color: Colors.black,fontSize: 18),
+                                      ),
+                                      SizedBox(height: 2,),
+                                      Text(
+                                        format_posted_time(document['time']).toString(),
+                                        style: TextStyle(color: Colors.black,fontSize: 12,fontWeight: FontWeight.w300),
+                                      ),
+                                    ],
                                   ),
-                                )),
-                          );
-                        }).toList(),
-                      ),
+                                ),
+                              )),
+                        );
+                      }).toList(),
                     );
                   }
                 }),

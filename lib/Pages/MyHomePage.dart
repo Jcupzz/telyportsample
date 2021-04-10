@@ -2,6 +2,7 @@ import 'package:bot_toast/bot_toast.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
 // import 'package:geolocator/geolocator.dart' as geo;
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -52,25 +53,23 @@ class _MyHomePageState extends State<MyHomePage> {
     FirebaseAuth _auth = FirebaseAuth.instance;
     final User firebaseUser = _auth.currentUser;
 
-    if(firebaseUser!=null){
+    if (firebaseUser != null) {
       await FirebaseFirestore.instance
           .collection(firebaseUser.uid)
-          .orderBy('time',descending: true)
+          .orderBy('time', descending: true)
           .limitToLast(5)
           .get()
           .then((QuerySnapshot querySnapshot) => querySnapshot.docs.forEach((doc) {
-        print(LatLng(doc['lat'], doc['long']));
-        myMarker.add(Marker(
-          markerId: MarkerId(LatLng(doc['lat'], doc['long']).toString()),
-          onTap: () {
-            setState(() {});
-          },
-          position: LatLng(doc['lat'], doc['long']),
-          infoWindow: InfoWindow(title: 'location', snippet: doc['lat'].toString())
-        ));
-      }));
+                print(LatLng(doc['lat'], doc['long']));
+                myMarker.add(Marker(
+                    markerId: MarkerId(LatLng(doc['lat'], doc['long']).toString()),
+                    onTap: () {
+                      setState(() {});
+                    },
+                    position: LatLng(doc['lat'], doc['long']),
+                    infoWindow: InfoWindow(title: 'location', snippet: doc['lat'].toString())));
+              }));
     }
-
   }
 
   Future<Position> _getUserLocationPermission() async {
@@ -100,7 +99,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    _getAllLatLongFromFb();
     return Scaffold(
       backgroundColor: Colors.blueGrey[50],
       body: SafeArea(
@@ -137,7 +135,7 @@ class _MyHomePageState extends State<MyHomePage> {
               Divider(
                 height: 10,
               ),
-              isSwitched
+              (isSwitched)
                   ? Expanded(
                       child: GoogleMap(
                       mapToolbarEnabled: true,
@@ -148,7 +146,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       markers: Set.from(myMarker),
                       onMapCreated: _onMapCreated,
                       initialCameraPosition: CameraPosition(
-                        target: LatLng(10.3098831,76.3432708),
+                        target: LatLng(10.3098831, 76.3432708),
                         zoom: 6,
                       ),
                     ))
@@ -195,4 +193,6 @@ class _MyHomePageState extends State<MyHomePage> {
       }
     });
   }
+
+  Widget MyWidgetList() {}
 }
