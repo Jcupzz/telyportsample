@@ -99,6 +99,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    _getAllLatLongFromFb();
     return Scaffold(
       backgroundColor: Colors.blueGrey[50],
       body: SafeArea(
@@ -194,5 +195,4 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  Widget MyWidgetList() {}
 }
