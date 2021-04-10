@@ -37,6 +37,7 @@ dependencies:
   curved_navigation_bar: ^0.3.7
   bot_toast: ^4.0.1
   connectivity: ^3.0.3
+  google_maps_flutter: ^2.0.3
 
 
 dev_dependencies:

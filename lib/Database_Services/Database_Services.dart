@@ -63,7 +63,7 @@ class Database_Services{
           "text": text,
         })
             .then((value) {
-          error_handling.printSuccess("List updated!");
+          error_handling.printSuccess("Note updated!");
         });
       }
       else {
@@ -71,7 +71,7 @@ class Database_Services{
           "time": DateTime.now(),
           "text": text,
         }).then((value) {
-          error_handling.printSuccess("List added!");
+          error_handling.printSuccess("Note added!");
         });
       }
     }
@@ -89,7 +89,7 @@ class Database_Services{
         .doc(documentSnapshot.id)
         .delete()
         .then((value) {
-      error_handling.printSuccess("Listy deleted!");
+      error_handling.printSuccess("Note deleted!");
     }).catchError((error) {
       error_handling.printError(
           "Something's wrong! check internet connection and try again!");

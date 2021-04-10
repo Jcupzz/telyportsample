@@ -39,7 +39,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
         animationCurve: Curves.bounceInOut,
         animationDuration: Duration(milliseconds: 200),
         color: Colors.blue,
-        buttonBackgroundColor: Colors.blue[700],
+        buttonBackgroundColor: Colors.blue[600],
         height: 60,
         items: <Widget>[
           Icon(

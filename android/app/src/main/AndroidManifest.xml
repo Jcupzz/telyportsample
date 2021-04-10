@@ -8,6 +8,10 @@
         android:label="telyportsample"
         android:icon="@mipmap/ic_launcher">
 
+
+        <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyC2kWNM4WhotjgUBCCLCG4RCu20n-ypvn8"/>
+
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
